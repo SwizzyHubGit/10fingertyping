@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Typing Tutor – Basic MVP</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+<h1>Typing Tutor</h1>
+<div id="themeToggle">
+<label class="theme-switch">
+<input type="checkbox" id="themeSwitch" aria-label="Toggle theme">
+<span class="slider">
+<span class="sun-icon">☀️</span>
+<span class="moon-icon">🌙</span>
+</span>
+</label>
+</div>
+<div id="stats">
+<span id="wpm">WPM: 0</span>
+<span id="accuracy">Accuracy: 100%</span>
+<span id="timer">Time: 00:00</span>
+</div>
+</header>
+
+
+<main>
+<div id="controls">
+<label>Lesson:
+<select id="lesson" aria-label="Select lesson">
+<optgroup label="Home Row">
+<option value="asdf ">Left Hand Home Row (asdf)</option>
+<option value="jklö " selected>Right Hand Home Row (jklö)</option>
+<option value="asdfjklö ">Both Hands Home Row (asdfjklö)</option>
+</optgroup>
+<optgroup label="Top Row">
+<option value="qwert ">Left Hand Top Row (qwert)</option>
+<option value="yuiop ">Right Hand Top Row (yuiop)</option>
+<option value="qwertyuiop ">Both Hands Top Row (qwertyuiop)</option>
+</optgroup>
+<optgroup label="Bottom Row">
+<option value="zxcv ">Left Hand Bottom Row (zxcv)</option>
+<option value="bnm, ">Right Hand Bottom Row (bnm,)</option>
+<option value="zxcvbnm, ">Both Hands Bottom Row (zxcvbnm,)</option>
+</optgroup>
+<optgroup label="Combined Lessons">
+<option value="asdfjklöqwertyuiop ">Home + Top Row</option>
+<option value="asdfjklözxcvbnm, ">Home + Bottom Row</option>
+<option value="qwertyuiopzxcvbnm, ">Top + Bottom Row</option>
+</optgroup>
+<optgroup label="Full Keyboard">
+<option value="abcdefghijklmnopqrstuvwxyz, ">All Letters + Punctuation</option>
+</optgroup>
+<optgroup label="Custom">
+<option value="custom">Custom Text (paste your own)</option>
+</optgroup>
+</select>
+</label>
+<div id="customTextContainer" style="display:none;">
+<label>Your text:
+<textarea id="customText" rows="4" placeholder="Paste or type your own text here..." aria-label="Custom text input"></textarea>
+</label>
+</div>
+<label id="lengthLabel">Length:
+<input id="len" type="number" min="40" max="600" step="10" value="160" />
+</label>
+<button id="newText">New text</button>
+<button id="restart">Restart</button>
+</div>
+
+
+<div id="textToType" aria-live="polite"></div>
+<div id="hint">Hard mode is ON: you can only advance when the key is correct. Use Backspace to fix the previous character.</div>
+
+
+<div id="best">Best WPM: <span id="bestWpm">0</span> · Best Accuracy: <span id="bestAcc">0%</span></div>
+</main>
+
+
+<footer>
+<small>Local only · No data leaves your browser</small>
+</footer>
+
+
+<script src="app.js"></script>
+</body>
+</html>
