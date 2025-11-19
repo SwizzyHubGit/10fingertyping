@@ -22,8 +22,24 @@
 <span id="wpm">WPM: 0</span>
 <span id="accuracy">Accuracy: 100%</span>
 <span id="timer">Time: 00:00</span>
+<button id="fullscreenBtn" class="icon-btn" aria-label="Toggle fullscreen">⛶</button>
+<button id="calendarBtn" class="icon-btn" aria-label="View practice calendar">📅</button>
 </div>
 </header>
+
+<div id="calendarModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<h2>Practice Calendar</h2>
+<button class="modal-close" aria-label="Close calendar">&times;</button>
+</div>
+<div class="calendar-container">
+<div id="streakDisplay">Current Streak: <span id="streakCount">0</span> days 🔥</div>
+<div id="calendarGrid"></div>
+</div>
+</div>
+</div>
+<div id="modalOverlay" class="modal-overlay"></div>
 
 
 <main>
@@ -58,11 +74,9 @@
 </optgroup>
 </select>
 </label>
-<div id="customTextContainer" style="display:none;">
-<label>Your text:
-<textarea id="customText" rows="4" placeholder="Paste or type your own text here..." aria-label="Custom text input"></textarea>
+<label id="adaptiveLabel" style="margin-left:8px;display:flex;align-items:center;gap:6px">
+<input id="adaptive" type="checkbox" /> Adaptive mode
 </label>
-</div>
 <label id="lengthLabel">Length:
 <input id="len" type="number" min="40" max="600" step="10" value="160" />
 </label>
@@ -70,12 +84,73 @@
 <button id="restart">Restart</button>
 </div>
 
+<!-- Keyboard label + toggle (always visible) -->
+  <div class="keyboard-bar">
+  <span class="keyboard-label">Keyboard</span>
+  <button id="toggleKeyboardBtn" class="icon-btn kb-toggle-btn" aria-expanded="true" aria-controls="keyboard" aria-label="Hide keyboard" title="Hide keyboard">
+    <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 10l5 5 5-5z"/></svg>
+  </button>
+</div>
+<!-- On-screen keyboard for visual guidance -->
+<div id="keyboard" class="keyboard" aria-hidden="false">
+  <div class="kb-row">
+    <div class="key" data-key="q">q</div>
+    <div class="key" data-key="w">w</div>
+    <div class="key" data-key="e">e</div>
+    <div class="key" data-key="r">r</div>
+    <div class="key" data-key="t">t</div>
+    <div class="key" data-key="y">y</div>
+    <div class="key" data-key="u">u</div>
+    <div class="key" data-key="i">i</div>
+    <div class="key" data-key="o">o</div>
+    <div class="key" data-key="p">p</div>
+  </div>
+  <div class="kb-row">
+    <div class="key" data-key="a">a</div>
+    <div class="key" data-key="s">s</div>
+    <div class="key" data-key="d">d</div>
+    <div class="key" data-key="f">f</div>
+    <div class="key" data-key="j">j</div>
+    <div class="key" data-key="k">k</div>
+    <div class="key" data-key="l">l</div>
+    <div class="key" data-key="ö">ö</div>
+    <div class="key" data-key="," aria-label=",">,</div>
+  </div>
+  <div class="kb-row">
+    <div class="key" data-key="z">z</div>
+    <div class="key" data-key="x">x</div>
+    <div class="key" data-key="c">c</div>
+    <div class="key" data-key="v">v</div>
+    <div class="key" data-key="b">b</div>
+    <div class="key" data-key="n">n</div>
+    <div class="key" data-key="m">m</div>
+    <div class="key key-space" data-key=" " aria-label="space">Space</div>
+  </div>
+</div>
 
 <div id="textToType" aria-live="polite"></div>
+
 <div id="hint">Hard mode is ON: you can only advance when the key is correct. Use Backspace to fix the previous character.</div>
 
 
 <div id="best">Best WPM: <span id="bestWpm">0</span> · Best Accuracy: <span id="bestAcc">0%</span></div>
+
+<div id="nextSuggestion" aria-live="polite" style="margin-top:8px;color:var(--muted);font-size:13px;display:flex;align-items:center;gap:8px">
+  <span>Next suggestion:</span>
+  <span id="nextHint">—</span>
+</div>
+
+ 
+ 
+<div id="achievements" class="collapsed">
+<h3>
+    Achievements
+    <button id="achToggle" class="chevron-btn collapsed" aria-expanded="false" aria-controls="badges" title="Show/hide achievements">
+      <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 10l5 5 5-5z"/></svg>
+    </button>
+</h3>
+<div id="badges"></div>
+</div>
 </main>
 
 
